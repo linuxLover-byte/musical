@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:audiofileplayer/audiofileplayer.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
-  runApp(Musical());
+  runApp(const Musical());
 }
 
 class Musical extends StatelessWidget {
@@ -11,172 +11,48 @@ class Musical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void play_audio(int num) {
+      Audio.load('assets/note$num.wav')
+        ..play()
+        ..dispose();
+    }
+
+    Expanded buildKey({required Color color, required int audio}) {
+      return Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Container(
+            color: color,
+            child: TextButton(
+              onPressed: () {
+                play_audio(audio);
+              },
+              child: const Text(
+                'Play Me 1',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.green,
-                    child: TextButton(
-                      onPressed: () {
-                        Audio.load('assets/note1.wav')
-                          ..play()
-                          ..dispose();
-                      },
-                      child: const Text(
-                        'Play Me 1',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.pink,
-                    child: TextButton(
-                      onPressed: () {
-                        Audio.load('assets/note2.wav')
-                          ..play()
-                          ..dispose();
-                      },
-                      child: const Text(
-                        'Play Me 2',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.red,
-                    child: TextButton(
-                      onPressed: () {
-                        Audio.load('assets/note3.wav')
-                          ..play()
-                          ..dispose();
-                      },
-                      child: const Text(
-                        'Play Me 3',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.blue,
-                    child: TextButton(
-                      onPressed: () {
-                        Audio.load('assets/note4.wav')
-                          ..play()
-                          ..dispose();
-                      },
-                      child: const Text(
-                        'Play Me 4',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.amber,
-                    child: TextButton(
-                      onPressed: () {
-                        Audio.load('assets/note5.wav')
-                          ..play()
-                          ..dispose();
-                      },
-                      child: const Text(
-                        'Play Me 5',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.cyan,
-                    child: TextButton(
-                      onPressed: () {
-                        Audio.load('assets/note6.wav')
-                          ..play()
-                          ..dispose();
-                      },
-                      child: const Text(
-                        'Play Me 6',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.grey,
-                    child: TextButton(
-                      onPressed: () {
-                        Audio.load('assets/note7.wav')
-                          ..play()
-                          ..dispose();
-                      },
-                      child: const Text(
-                        'Play Me 7',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              buildKey(color: Colors.red, audio: 1),
+              buildKey(color: Colors.green, audio: 2),
+              buildKey(color: Colors.purple, audio: 3),
+              buildKey(color: Colors.pink, audio: 4),
+              buildKey(color: Colors.orange, audio: 5),
+              buildKey(color: Colors.blueGrey, audio: 6),
+              buildKey(color: Colors.blue, audio: 7),
             ],
           ),
         ),
